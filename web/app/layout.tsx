@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NordicTax Dashboard",
+  title: "NordicTax",
   description: "CSV to Norwegian crypto tax summary with FIFO",
   manifest: "/site.webmanifest",
   icons: {
