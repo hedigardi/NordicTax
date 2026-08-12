@@ -22,7 +22,7 @@ It outputs the three core values for your yearly filing:
 - Skatteetaten-friendly export in JSON and CSV
 - Optional opening balance lot (FIFO lot #0 at Jan 1)
 - Optional per-spend FIFO audit journal CSV export
-- Next.js dashboard for CSV upload and one-click calculation
+- Next.js web app for CSV upload and one-click calculation
 - Unit tests and CI workflow
 
 ## CLI Modes
@@ -97,15 +97,15 @@ Generate a transaction-level FIFO trail for review/audit:
 npm run report -- --gomining data/gomining_raw.csv --bybit data/bybit_raw.csv --tax-year 2026 --use-coingecko --audit-out output/audit-journal-2026.csv
 ```
 
-## Dashboard (Next.js)
+## Web App (Next.js)
 
-Install dashboard dependencies:
+Install web dependencies:
 
 ```bash
 npm run web:install
 ```
 
-Start dashboard:
+Start the web app:
 
 ```bash
 npm run web:dev
@@ -131,7 +131,7 @@ npm run web:build
 ## CI
 
 GitHub Actions workflow is available at `.github/workflows/ci.yml`.
-It runs typecheck, build, tests, and dashboard build on push and pull requests.
+It runs typecheck, build, tests, and web build on push and pull requests.
 
 ## Netlify Deployment
 
@@ -141,8 +141,11 @@ Key setup:
 
 - Base directory: `web`
 - Build command: `npm run build`
+- Publish directory: `.next`
 - Runtime plugin: `@netlify/plugin-nextjs`
 - Node version: `22`
+
+If you configure the site through the Netlify UI, keep the publish directory set to `.next` so it matches `netlify.toml`.
 
 Recommended deploy steps:
 
