@@ -291,7 +291,7 @@ export default function Page() {
           <img className="brand-logo" src="/logo.png" alt="NordicTax logo" />
           <div>
             <p className="brand-kicker">Norway Crypto Tax Workflow</p>
-            <h1 className="brand-title">NordicTax Dashboard</h1>
+            <h1 className="brand-title">NordicTax</h1>
           </div>
         </div>
         <button
