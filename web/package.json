@@ -1,0 +1,28 @@
+{
+  "name": "nordictax-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "node ./scripts/clean-next.mjs all",
+    "clean:dev": "node ./scripts/clean-next.mjs dev",
+    "clean:build": "node ./scripts/clean-next.mjs build",
+    "dev": "node ./scripts/dev-stable.mjs",
+    "dev:fast": "next dev",
+    "dev:reset": "npm run clean:dev && node ./scripts/dev-stable.mjs",
+    "build": "npm run clean:build && next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "15.5.3",
+    "papaparse": "^5.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
+  }
+}

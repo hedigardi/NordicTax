@@ -1,0 +1,40 @@
+{
+  "name": "nordictax",
+  "version": "1.0.0",
+  "description": "NordicTax - FIFO-based crypto tax calculator for mining payouts and card spending",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "npm run web:dev",
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/index.ts",
+    "report": "tsx src/index.ts report",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "web:install": "npm --prefix web install",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hedigardi/NordicTax.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/hedigardi/NordicTax/issues"
+  },
+  "homepage": "https://github.com/hedigardi/NordicTax#readme",
+  "dependencies": {
+    "papaparse": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/papaparse": "^5.5.2",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
