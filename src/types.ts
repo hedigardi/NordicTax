@@ -7,6 +7,8 @@ export interface CryptoTransaction {
   timestamp: Date;
   type: TransactionType;
   amountSats: bigint;
+  grossAmountSats?: bigint;
+  feeSats?: bigint;
   nokPricePerBtc: number;
 }
 
@@ -15,6 +17,8 @@ export interface RawCryptoTransaction {
   timestamp: Date;
   type: TransactionType;
   amountSats: bigint;
+  grossAmountSats?: bigint;
+  feeSats?: bigint;
 }
 
 export interface MiningLot {
