@@ -47,6 +47,21 @@ describe("CSV adapters", () => {
     });
   });
 
+  it("parses gomining gross reward with c1/c2 service and electricity fees", () => {
+    const csv = [
+      "id,timestamp,income,c1,c2,status",
+      "1,2026-01-02T00:00:00Z,0.00050000,0.00002000,0.00001000,exported",
+    ].join("\n");
+
+    withTempFile(csv, (filePath) => {
+      const rows = loadGoMiningPayoutsFromCsv(filePath);
+      expect(rows).toHaveLength(1);
+      expect(rows[0]?.amountSats).toBe(BigInt(50000));
+      expect(rows[0]?.grossAmountSats).toBe(BigInt(53000));
+      expect(rows[0]?.feeSats).toBe(BigInt(3000));
+    });
+  });
+
   it("parses bybit spend rows and skips transfers/deposits", () => {
     const csv = [
       "id,timestamp,amount_btc,description",

@@ -146,6 +146,18 @@ function parseRawCsvText(
     const signRaw = config.signFields
       ? pickField(row, config.signFields)
       : undefined;
+    const feeCandidates = [
+      "c1",
+      "c2",
+      "fee",
+      "fee_btc",
+      "service_fee",
+      "service_fee_btc",
+      "electricity_fee",
+      "electricity_fee_btc",
+      "total_fee",
+      "total_fee_btc",
+    ];
 
     if (!timestampRaw) {
       throw new Error(
@@ -178,6 +190,25 @@ function parseRawCsvText(
         ? Math.abs(amountBtc) * Math.sign(parseDecimalValue(signRaw))
         : amountBtc;
 
+    let feeBtc = 0;
+    if (type === "MINING_PAYOUT") {
+      for (const field of feeCandidates) {
+        const value = row[field];
+        if (value === undefined || value === "") {
+          continue;
+        }
+
+        const parsedFee = Math.abs(parseDecimalValue(value));
+        if (Number.isFinite(parsedFee) && parsedFee > 0) {
+          feeBtc += parsedFee;
+        }
+      }
+    }
+
+    const netMiningBtc = Math.abs(effectiveAmountBtc);
+    const grossMiningBtc =
+      type === "MINING_PAYOUT" ? netMiningBtc + feeBtc : netMiningBtc;
+
     if (effectiveAmountBtc < 0 && type === "MINING_PAYOUT") {
       return;
     }
@@ -193,7 +224,13 @@ function parseRawCsvText(
       id: id.trim(),
       timestamp,
       type,
-      amountSats: btcToSats(Math.abs(effectiveAmountBtc)),
+      amountSats: btcToSats(netMiningBtc),
+      grossAmountSats:
+        type === "MINING_PAYOUT" && grossMiningBtc > 0
+          ? btcToSats(grossMiningBtc)
+          : undefined,
+      feeSats:
+        type === "MINING_PAYOUT" && feeBtc > 0 ? btcToSats(feeBtc) : undefined,
     });
   });
 
